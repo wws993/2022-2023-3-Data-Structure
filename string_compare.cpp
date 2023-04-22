@@ -1,9 +1,10 @@
-﻿// string_compare.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+// string_compare.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include<time.h>
 #include<algorithm>
+#include<string>
 
 using namespace std;
 
@@ -84,6 +85,12 @@ int bm(char* s1, char* s2, int len1, int len2) {
     return -1;
 }
 
+string make_string(int len) {//构造数据函数
+    string s;
+    for (int i = 0; i < len; i++)
+        s.push_back(char('a' + rand() % 26));
+    return s;
+}
 
 /*
 14 5
@@ -94,15 +101,23 @@ int main()
 {
     int m, n;
     cin >> n >> m;
-    
     char* s1 = new char[n + 10];
     char* s2 = new char[m + 10];
-    
-    
-    for (int i = 0; i < n; i++) 
+    /* 
+    //自动构造大数据进行时间测试
+    string s = make_string(n);
+    //cout << s << endl;
+    for (int i = 0; i < n; i++)
+        s1[i] = s[i];
+    for (int i = n-m-5,j=0; i < n-5; j++,i++)
+        s2[j] = s[i];
+    */
+    //小数据判断正确性
+    for (int i = 0; i < n; i++)
         cin >> s1[i];
     for (int i = 0; i < m; i++)
         cin >> s2[i];
+
 
     clock_t start = clock();
     cout<<"bf result:" << bf(s1, s2, n, m) << endl;
